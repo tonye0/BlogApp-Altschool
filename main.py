@@ -28,7 +28,7 @@ def about():
 @app.get("/contact", tags=["HomePage"])
 def contact():
     return {
-        "message": "Contact info"
-        }
+        "message": "https://github.com/tonye0/BlogApp-Altschool"
+   
 
 
