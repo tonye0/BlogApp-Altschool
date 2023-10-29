@@ -29,6 +29,4 @@ def about():
 def contact():
     return {
         "message": "https://github.com/tonye0/BlogApp-Altschool"
-   
-
-
+        }
