@@ -15,8 +15,8 @@ To test the endpoints, follow these steps:
 
 1. **Create a User:**
 - Use the `create user` endpoint in the user route.
-- Take note of the **author ID** after creating the user, as this will be used when creating an article.
-- Each user has a unique ID.
+- Take note of the **author ID** after creating the user, as this will be used whenever that user wants to create an article.
+- Each user has a unique ID that links to their articles.
 
 2. **Creating an Article:**
 - Use the appropriate endpoint, ensuring you provide the author ID to link the author to the article.
