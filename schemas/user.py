@@ -4,31 +4,26 @@ from datetime import datetime
 from schemas.article import DisplayArticle
 
 
-
 class BaseUser(BaseModel):
     first_name: str
     last_name: str
     username: str
     email: str
-    
+
     class Config:
         from_attributes = True
-    
-    
+
+
 class User(BaseUser):
     articles: List[DisplayArticle] = []
-    
-    
+
     class Config:
         from_attributes = True
-    
 
 
-
-class UserCreate(BaseUser):   
+class UserCreate(BaseUser):
     password: str
 
-    
     class Config:
         from_attributes = True
 
@@ -36,7 +31,6 @@ class UserCreate(BaseUser):
 class UpdateUser(BaseUser):
     class Config:
         from_attributes = True
-   
 
 
 class UserLogin(BaseModel):
