@@ -12,7 +12,6 @@ app.include_router(user_router, prefix="/user", tags=["Users"])
 app.include_router(article_router, prefix="/article", tags=["Articles"])
 
 
-
 @app.get("/", tags=["HomePage"])
 def homepage():
 
@@ -35,5 +34,5 @@ def about():
 @app.get("/contact", tags=["HomePage"])
 def contact():
     return {
-        "message": "Here is my github profile : 'https://github.com/tonye0/'. Feel free to reach out."
+        "message": "https://github.com/tonye0/BlogApp-Altschool"
     }
