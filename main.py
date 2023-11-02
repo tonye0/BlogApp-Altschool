@@ -34,5 +34,5 @@ def about():
 @app.get("/contact", tags=["HomePage"])
 def contact():
     return {
-        "message": "https://github.com/tonye0/BlogApp-Altschool"
+        "Here is my github profile : 'https://github.com/tonye0/'. Feel free to reach out."
     }
