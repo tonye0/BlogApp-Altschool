@@ -23,14 +23,14 @@ def register_user(req: UserCreate, db: Session = Depends(get_db)):
     
 
 
-@user_router.get("/{id}", status_code=status.HTTP_200_OK, response_model=User) 
-def get_user_by_id(id: int, db: Session = Depends(get_db)):
+@user_router.get("/{username}", status_code=status.HTTP_200_OK, response_model=User) 
+def get_user_by_username(username: str, db: Session = Depends(get_db)):
     
-    return user.get_user(id, db)
+    return user.get_user(username, db)
     
 
 
-@user_router.put("/{id}/update", status_code=status.HTTP_200_OK)
-def update_user(id: int, req: UpdateUser, db: Session = Depends(get_db), current_user: UserLogin = Depends(get_current_user)):
+@user_router.put("/{username}/update", status_code=status.HTTP_200_OK)
+def update_user(username: str, req: UpdateUser, db: Session = Depends(get_db), current_user: UserLogin = Depends(get_current_user)):
     
-    return user.update(id, req, db)
+    return user.update(username, req, db)

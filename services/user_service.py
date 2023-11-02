@@ -47,39 +47,48 @@ class UserService:
             )
 
         hashed_password = PasswordHasher.get_password_hash(req.password)
+        
+        
         new_user = models.User(
             first_name = req.first_name, 
             last_name = req.last_name, 
             username = req.username, 
             email = req.email, 
-            password = hashed_password
+            password = hashed_password,
         )
         
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
         
+        
         new_profile = {
-            "First name": req.first_name,
-            "Last name": req.last_name,
-            "Username": req.username,
-            "Email": req.email
+            "Name": f"{req.first_name} {req.last_name}",            "Username": req.username,
+            "Email": req.email,
         }
+        
         return {
             "message": "Thank you for registering.",
             "Profile": new_profile
             }
     
       
-    def get_user(self, id: int, db: Session):
+    def get_user(self, username: str, db: Session):
         
-        user = db.query(models.User).filter(models.User.id == id).first()
+        user = db.query(models.User).filter(models.User.username == username).first()
         if not user:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"There is no user with the id {id}")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"There is no user with the username {username}")
         return user
     
     
-    def update(self, id: int, req, db: Session):
+    def update(self, username: str, req, db: Session):
+        
+        user_update = db.query(models.User).filter(models.User.username == username)
+    
+        if not user_update.first():
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = f"User with username {username} not found.")
+         
+        
         is_valid = validate_email(req.email)
         
         if not is_valid:
@@ -88,11 +97,7 @@ class UserService:
                 detail="Invalid email address. Please provide a valid email."
             )
             
-        user_update = db.query(models.User).filter(models.User.id == id)
-    
-        if not user_update.first():
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = "User not found.")
-        
+      
         user_update.update(req.dict()) 
         
         db.commit()

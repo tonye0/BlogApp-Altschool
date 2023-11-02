@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from datetime import datetime
 from schemas.article import DisplayArticle
 
 
@@ -26,6 +27,7 @@ class User(BaseUser):
 
 class UserCreate(BaseUser):   
     password: str
+
     
     class Config:
         from_attributes = True
